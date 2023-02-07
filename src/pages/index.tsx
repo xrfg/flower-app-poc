@@ -13,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
-        <div className="">Flower APP PoC</div>
+        <div className="text-primary-wine">Flower APP PoC</div>
       </main>
     </>
   );
