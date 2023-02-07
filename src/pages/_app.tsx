@@ -1,6 +1,8 @@
 import "@/styles/globals.css";
 import { Raleway } from "@next/font/google";
 import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const raleway = Raleway({
   weight: ["400", "500", "600", "700"],
@@ -8,10 +10,15 @@ const raleway = Raleway({
   subsets: ["latin"],
 });
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={raleway.className}>
-      <Component {...pageProps} />
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <main className={raleway.className}>
+        <Component {...pageProps} />
+      </main>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
