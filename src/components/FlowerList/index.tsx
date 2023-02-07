@@ -2,7 +2,8 @@ import React from "react";
 import { useInfiniteQuery } from "react-query";
 import * as api from "../../api/flowerApi";
 import PrimaryBtn from "../Buttons/PrimaryBtn";
-import Flower, { FlowerData } from "../Flower";
+import FlowerItem from "../FlowerItem";
+import { FlowerData } from "../FlowerItem";
 
 type PageData = {
   data: FlowerData[];
@@ -35,16 +36,16 @@ export default function FlowerList(): JSX.Element {
   }
 
   return (
-    <div>
-      <ul>
+    <div className="w-full flex flex-col items-center gap-4">
+      <ul className="flex flex-row flex-wrap gap-3 justify-center w-full">
         {data?.pages.map((page: PageData) =>
           page.data.map((flower: FlowerData) => {
-            return <Flower key={flower.id} flower={flower} />;
+            return <FlowerItem key={flower.id} flower={flower} />;
           })
         )}
       </ul>
       {hasNextPage && (
-        <PrimaryBtn onClick={() => fetchNextPage()} text="Load More" />
+        <PrimaryBtn onClick={() => fetchNextPage()}>Load More</PrimaryBtn>
       )}
     </div>
   );
