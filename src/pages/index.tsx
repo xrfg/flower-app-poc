@@ -1,6 +1,10 @@
 import Head from "next/head";
-import RoutingBtn from "@/components/Buttons/RoutingBtn";
+import RoutingBtn from "@/components/Buttons/PrimaryBtn";
 import Layout from "@/components/Layout";
+import Link from "next/link";
+import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
+import { FaArrowCircleRight } from "react-icons/fa";
+import React from "react";
 
 export default function Home() {
   return (
@@ -16,7 +20,12 @@ export default function Home() {
       </Head>
       <Layout>
         <div className="pt-8">
-          <RoutingBtn url="/inventory" text="Inventory" />
+          <Link href="/inventory">
+            <PrimaryBtn>
+              Inventory
+              <FaArrowCircleRight />
+            </PrimaryBtn>
+          </Link>
         </div>
       </Layout>
     </>
