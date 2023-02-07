@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { FaArrowCircleRight } from "react-icons/fa";
 
 type BtnProps = {
   url: string;
@@ -12,10 +13,10 @@ export default function RoutingBtn({ url, text }: BtnProps): JSX.Element {
       <button
         autoFocus
         type="button"
-        name="Go to Flower Inventory"
-        className="bg-primary-wine rounded-md shadow-md py-1 px-3 text-primary-mint"
+        name="Routing Button"
+        className="bg-secondary-sand capitalize rounded-lg shadow-md py-2 px-3.5 gap-2 text-primary-wine border border-primary-wine flex items-center hover:bg-secondary-lightSand duration-150 font-medium"
       >
-        {text}
+        {text} <FaArrowCircleRight />
       </button>
     </Link>
   );
