@@ -1,8 +1,6 @@
 import Head from "next/head";
-import RoutingBtn from "@/components/Buttons/PrimaryBtn";
-import Layout from "@/components/Layout";
+import { Layout, PageHeader, PrimaryBtn } from "@/components";
 import Link from "next/link";
-import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 import { FaArrowCircleRight } from "react-icons/fa";
 import React from "react";
 
@@ -19,14 +17,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="pt-8">
-          <Link href="/inventory">
-            <PrimaryBtn>
-              Inventory
-              <FaArrowCircleRight />
-            </PrimaryBtn>
-          </Link>
-        </div>
+        <PageHeader pageTitle="Home" />
+        <Link href="/inventory">
+          <PrimaryBtn>
+            Inventory
+            <FaArrowCircleRight />
+          </PrimaryBtn>
+        </Link>
       </Layout>
     </>
   );

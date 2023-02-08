@@ -1,12 +1,11 @@
-import FlowerList from "@/components/FlowerList";
-import Layout from "@/components/Layout";
 import React from "react";
+import { Layout, FlowerList, PageHeader } from "@/components";
 
 export default function inventory() {
   return (
     <Layout>
       <div className="flex gap-2 flex-col items-start">
-        <h4 className="font-semibold text-primary-wine">Inventory</h4>
+        <PageHeader pageTitle="Inventory" />
         <FlowerList />
       </div>
     </Layout>

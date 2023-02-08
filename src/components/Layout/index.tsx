@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from "react";
 import Navbar from "../Navbar";
 
 export default function Layout({ children }: PropsWithChildren) {
+  //ba
   return (
     <div className="relative flex flex-col items-center w-full bg-secondary-lightSand min-h-screen">
       <Navbar />
