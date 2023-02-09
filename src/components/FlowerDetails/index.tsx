@@ -1,9 +1,17 @@
-import Image from "next/image";
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { useMutation, useQueryClient } from "react-query";
+import Image from "next/image";
+import { NextRouter, useRouter } from "next/router";
+
+import { FavoriteStar } from "@/components";
+
 import * as api from "../../api/flowerApi";
 import { FlowerData } from "../FlowerItem";
+
+const dataContainer = "border border-b-primary-wine";
+const dataTitle = "text-primary-wine text-base";
+const dataValue = "font-semibold";
 
 export default function FlowerDetails({
   id,
@@ -11,32 +19,34 @@ export default function FlowerDetails({
   color,
   scientificName,
   image,
-}: FlowerData) {
+}: FlowerData): JSX.Element {
+  const router: NextRouter = useRouter();
   const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation(api.deleteFlower, {
-    onSuccess: (data) => {
-      //data is the id?
-      console.log(data);
-      //find the flowerDetails to delete?
-      const newFlowersArr: any[] = [];
-      queryClient.setQueryData("flowers", newFlowersArr);
-      //move out of the page...
+    onError: (error: Error) => {
+      window.alert(`${error?.message}.`);
+    },
+    onSuccess: ({ success }: { success: boolean }) => {
+      window.alert(
+        `Success: ${success}. Flower with an ID of ${id} and name ${name}, has been successfully removed from the inventory!`
+      );
+      queryClient.invalidateQueries("flowers");
+      router.push("/inventory");
     },
   });
 
-  const DeleteFunc = (plantId: string) => {
+  const RemovePlant = (plantId: string) => {
     mutate(plantId);
   };
 
-  if (isLoading) {
-    <span>Removing from inventory...</span>;
-  }
+  isLoading && <span>Removing from inventory...</span>;
+
   return (
-    <div className="flex gap-2 flex-col md:flex-row w-full">
-      <div className="w-1/2">
-        <h2 className="font-bold">{name}</h2>
-        <div className="max-w-xl h-48 sm:h-96 relative object-cover">
+    <div className="flex relative gap-2 p-3 md:p-4 mt-4 pb-3 md:pb-6 bg-primary-mint rounded-xl shadow-md flex-col md:flex-row w-full h-full md:w-full items-center">
+      <div className="w-full md:w-[49%] flex justify-center flex-col gap-2 items-center">
+        <h2 className="font-bold text-xl">{name}</h2>
+        <div className="relative h-64 w-64 md:h-80 md:w-80 rounded-xl shadow-md overflow-hidden">
           <Image
             src={image}
             alt={name}
@@ -47,11 +57,28 @@ export default function FlowerDetails({
           />
         </div>
       </div>
-      <div className="flex flex-col w-1/2">
-        <span>Id: {id}</span>
-        <span>Scientific name: {scientificName}</span>
-        <span>Color: {color}</span>
-        <FaTrash onClick={() => DeleteFunc(id)} />
+      <div className="flex flex-col text-lg self-stretch h-full w-full md:w-[49%]">
+        <div className="flex gap-2 items-center">
+          <FavoriteStar flowerId={id} />
+          <FaTrash
+            className="cursor-pointer"
+            color="red"
+            size={22}
+            onClick={() => RemovePlant(id)}
+          />
+        </div>
+        <div className={dataContainer}>
+          <span className={dataTitle}>ID:</span>{" "}
+          <span className={dataValue}>{id}</span>
+        </div>
+        <div className={dataContainer}>
+          <span className={dataTitle}>Scientific name:</span>{" "}
+          <span className={dataValue}>{scientificName}</span>
+        </div>
+        <div>
+          <span className={dataTitle}>Color:</span>{" "}
+          <span className={dataValue}>{color}</span>
+        </div>
       </div>
     </div>
   );
