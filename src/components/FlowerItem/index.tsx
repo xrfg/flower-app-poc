@@ -1,7 +1,8 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { FaRegStar, FaStar } from "react-icons/fa";
+
+import FavoriteStar from "../FavoriteStar";
 
 export interface FlowerData {
   color: string;
@@ -16,24 +17,6 @@ export default function FlowerItem({
 }: {
   flower: FlowerData;
 }): JSX.Element {
-  const [favorite, setFavorite] = useState<boolean>(false);
-
-  useEffect(() => {
-    const isFavorite = window.localStorage.getItem(`${flower.id}-isFavorite`);
-    isFavorite !== null && setFavorite(JSON.parse(isFavorite));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    favorite
-      ? window.localStorage.setItem(
-          `${flower.id}-isFavorite`,
-          JSON.stringify(favorite)
-        )
-      : window.localStorage.removeItem(`${flower.id}-isFavorite`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [favorite]);
-
   return (
     <Link
       href={{
@@ -60,27 +43,7 @@ export default function FlowerItem({
           </h4>
           <span className="text-sm">{flower.color}</span>
         </div>
-        <div className="text-primary-wine ml-auto">
-          {favorite ? (
-            <FaStar
-              size={26}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.nativeEvent.preventDefault();
-                setFavorite((prev) => !prev);
-              }}
-            />
-          ) : (
-            <FaRegStar
-              size={26}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.nativeEvent.preventDefault();
-                setFavorite((prev) => !prev);
-              }}
-            />
-          )}
-        </div>
+        <FavoriteStar flowerId={flower?.id} />
       </li>
     </Link>
   );

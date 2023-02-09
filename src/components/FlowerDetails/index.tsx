@@ -40,10 +40,12 @@ export default function FlowerDetails({
     mutate(plantId);
   };
 
-  isLoading && <span>Removing from inventory...</span>;
+  if (isLoading) {
+    return <span>Removing from inventory...</span>;
+  }
 
   return (
-    <div className="flex relative gap-2 p-3 md:p-4 mt-4 pb-3 md:pb-6 bg-primary-mint rounded-xl shadow-md flex-col md:flex-row w-full h-full md:w-full items-center">
+    <div className="flex relative gap-2 p-3 md:p-6 mt-4 pb-3 md:pb-8 bg-primary-mint rounded-xl shadow-md flex-col md:flex-row w-full h-full md:w-full items-center">
       <div className="w-full md:w-[49%] flex justify-center flex-col gap-2 items-center">
         <h2 className="font-bold text-xl">{name}</h2>
         <div className="relative h-64 w-64 md:h-80 md:w-80 rounded-xl shadow-md overflow-hidden">

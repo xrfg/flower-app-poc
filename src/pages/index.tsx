@@ -1,8 +1,9 @@
-import Head from "next/head";
-import { Layout, PageHeader, PrimaryBtn } from "@/components";
-import Link from "next/link";
-import { FaArrowCircleRight } from "react-icons/fa";
 import React from "react";
+import { FaArrowCircleRight } from "react-icons/fa";
+import Head from "next/head";
+import Link from "next/link";
+
+import { Layout, PageHeader, PrimaryBtn } from "@/components";
 
 export default function Home() {
   return (

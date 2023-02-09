@@ -1,6 +1,7 @@
-import { FlowerData } from "@/components/FlowerItem";
 import React from "react";
+
 import { FlowerDetails, GoBackBtn, Layout, PageHeader } from "@/components";
+import { FlowerData } from "@/components/FlowerItem";
 
 export const getServerSideProps = (context: { query: FlowerData }) => {
   if (context.query?.name) {

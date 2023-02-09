@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
 import React from "react";
 import { FaArrowCircleLeft } from "react-icons/fa";
+import { NextRouter, useRouter } from "next/router";
 
 export default function GoBackBtn(): JSX.Element {
-  const router = useRouter();
+  const router: NextRouter = useRouter();
   const goBack = () => {
     router.back();
   };
